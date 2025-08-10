@@ -41,6 +41,20 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme {
+  --color-secondary: rgba(255, 255, 255, 0.6);
+  --color-dark-primary: #1d1e22;
+  --color-dark: #37393c;
+  --color-dark-2: #2a2c33;
+  --color-dark-hover: #36373f;
+  --color-yellow-story: #f1e0ac;
+  --color-teal-user: #74959a;
+  --color-chat-bubble: #bdd2b6;
+  --color-chat-bubble2: #26272d;
+  --color-red-user: #f68989;
+  --color-green-user2: #65d7b8;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
