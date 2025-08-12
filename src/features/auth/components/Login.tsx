@@ -3,7 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Lottie from "lottie-react";
 import pawPrint from "../assets/Paw-Prints.json";
-export default function Login() {
+
+type loginProps = {
+  onSwitchToSignup: () => void;
+};
+
+export default function Login({ onSwitchToSignup }: loginProps) {
   return (
     <section className="flex flex-col  items-center justify-center h-full text-dark-primary text-center px-4  ">
       <Lottie
@@ -11,9 +16,12 @@ export default function Login() {
         animationData={pawPrint}
       />
 
-      <form className="grid w-full max-w-sm md:max-w-md lg:max-w-lg items-center gap-3 ">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="grid w-full max-w-sm md:max-w-md lg:max-w-lg items-center gap-3 "
+      >
         <h1 className="justify-self-start text-2xl font-extrabold mb-10">
-          Login
+          Sign in
         </h1>
 
         {/* email */}
@@ -21,7 +29,7 @@ export default function Login() {
           Email
         </Label>
         <Input
-          className="bg-gray-50 md:py-5"
+          className="bg-gray-50 md:py-5 placeholder:text-sm"
           type="email"
           id="email"
           placeholder="email"
@@ -31,7 +39,7 @@ export default function Login() {
           password
         </Label>
         <Input
-          className="bg-gray-50  md:py-5"
+          className="bg-gray-50  md:py-5 placeholder:text-sm"
           type="password"
           id="password"
           placeholder="password"
@@ -41,11 +49,14 @@ export default function Login() {
         </p>
         {/* login btn */}
         <Button className="md:text-lg md:py-5 cursor-pointer hover:bg-dark-hover">
-          Login
+          sign in
         </Button>
         <p className="flex items-center justify-center gap-2 text-dark">
           Don't have an account?
-          <span className="text-dark-primary font-bold cursor-pointer">
+          <span
+            onClick={onSwitchToSignup}
+            className="text-dark-primary font-bold cursor-pointer"
+          >
             {" "}
             Sign up
           </span>
