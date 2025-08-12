@@ -12,6 +12,7 @@ const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
   return (
     <div className="flex flex-col  items-center justify-center h-full text-dark-primary text-center px-4 ">
       <Lottie
+        loop={false}
         className="w-[300px] h-[300px] xl:w-[600px] xl:h-[600px] xl:-mt-16"
         animationData={peekingCatAnimation}
       />
@@ -28,7 +29,7 @@ const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
         h-10 px-6 text-base
         md:h-11 md:px-8 md:text-lg  
         2xl:h-16 2xl:px-14 2xl:text-xl
-        cursor-pointer hover:bg-dark-hover
+        cursor-pointer hover:bg-dark-hover gap-1
         "
       >
         Get Started
