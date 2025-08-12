@@ -24,16 +24,8 @@ const AuthPage = () => {
 
   return (
     <AuthLayout>
-      {/* تغییر کلیدی ۱: یک والد با position: relative ایجاد می‌کنیم.
-        این والد اندازه ثابت خود را حفظ کرده و پرش نمی‌کند.
-      */}
       <div className="relative w-full h-full">
         <AnimatePresence mode="wait">
-          {/* تغییر کلیدی ۲: motion.div فرزند مستقیم AnimatePresence است
-            و key مستقیماً روی آن قرار دارد.
-            کلاس‌های absolute باعث می‌شوند کامپوننت از جریان عادی خارج شده
-            و ارتفاع والد را تحت تاثیر قرار ندهد.
-          */}
           <motion.div
             key={view}
             initial={{ opacity: 0, y: 20 }}
