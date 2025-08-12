@@ -7,11 +7,15 @@ export default function Login() {
   return (
     <section className="flex flex-col  items-center justify-center h-full text-dark-primary text-center px-4  ">
       <Lottie
-        className="w-[200px] h-[200px]  md:w-[300px] md:h-[300px] xl:-mt-16"
+        className="w-[10rem] h-[10rem]  md:w-[15rem] md:h-[15rem] md:mt-20 "
         animationData={pawPrint}
       />
 
       <form className="grid w-full max-w-sm md:max-w-md lg:max-w-lg items-center gap-3 ">
+        <h1 className="justify-self-start text-2xl font-extrabold mb-10">
+          Login
+        </h1>
+
         {/* email */}
         <Label className="md:text-lg" htmlFor="email">
           Email
@@ -32,6 +36,9 @@ export default function Login() {
           id="password"
           placeholder="password"
         />
+        <p className="my-2 justify-self-end text-sm text-gray-500 cursor-pointer hover:text-dark-hover">
+          Forgot Password?
+        </p>
         {/* login btn */}
         <Button className="md:text-lg md:py-5 cursor-pointer hover:bg-dark-hover">
           Login
