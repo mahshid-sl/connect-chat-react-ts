@@ -28,6 +28,7 @@ const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
         h-10 px-6 text-base
         md:h-11 md:px-8 md:text-lg  
         2xl:h-16 2xl:px-14 2xl:text-xl
+        cursor-pointer hover:bg-dark-hover
         "
       >
         Get Started
