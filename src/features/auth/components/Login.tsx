@@ -3,12 +3,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Lottie from "lottie-react";
 import pawPrint from "../assets/Paw-Prints.json";
+import { useNavigate } from "react-router-dom";
 
 type loginProps = {
   onSwitchToSignup: () => void;
 };
 
 export default function Login({ onSwitchToSignup }: loginProps) {
+  const navigate = useNavigate();
   return (
     <section className="flex flex-col  items-center justify-center h-full text-dark-primary text-center px-4  ">
       <Lottie
@@ -48,7 +50,10 @@ export default function Login({ onSwitchToSignup }: loginProps) {
           Forgot Password?
         </p>
         {/* login btn */}
-        <Button className="md:text-lg md:py-5 cursor-pointer hover:bg-dark-hover">
+        <Button
+          onClick={() => navigate("/home")}
+          className="md:text-lg md:py-5 cursor-pointer hover:bg-dark-hover"
+        >
           sign in
         </Button>
         <p className="flex items-center justify-center gap-2 text-dark">
