@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 type ConversationListLayoutProps = {
   header: ReactNode;
@@ -10,8 +10,8 @@ export default function ConversationListLayout({
   children,
 }: ConversationListLayoutProps) {
   return (
-    <div className="flex flex-col h-full bg-white border-r">
-      <header className="p-4 flex-shrink-0">{header}</header>
+    <div className="flex h-full flex-col border-r bg-white">
+      <header className="flex-shrink-0 p-4">{header}</header>
 
       <div className="flex-grow overflow-y-auto">{children}</div>
     </div>

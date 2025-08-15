@@ -1,52 +1,7 @@
-// import { LuPawPrint } from "react-icons/lu";
-
-// import Lottie from "lottie-react";
-// import peekingCatAnimation from "../assets/hello-cat.json";
-// import { Button } from "@/components/ui/button";
-
-// type WelcomeScreenProps = {
-//   onGetStarted: () => void;
-// };
-
-// const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
-//   return (
-//     <div className="flex flex-col  items-center justify-center h-full text-dark-primary text-center px-4 ">
-//       <Lottie
-//         loop={false}
-//         className="w-[300px] h-[300px] xl:w-[600px] xl:h-[600px] xl:-mt-16"
-//         animationData={peekingCatAnimation}
-//       />
-
-//       <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-bold mt-10 lg:mt-5 animate-fade-in">
-//         Welcome to MeowChat!
-//       </h1>
-//       <p className="text-md md:text-lg lg:text-xl xl:text-3xl 2xl:text-6xl text-slate-500 mt-2 animate-fade-in-delay">
-//         The purr-fect place to connect.
-//       </p>
-//       <Button
-//         onClick={onGetStarted}
-//         className="flex items-center justify-center mt-10
-//         h-10 px-6 text-base
-//         md:h-11 md:px-8 md:text-lg
-//         2xl:h-16 2xl:px-14 2xl:text-xl
-//         cursor-pointer hover:bg-dark-hover gap-1
-//         "
-//       >
-//         Get Started
-//         <LuPawPrint />
-//       </Button>
-//     </div>
-//   );
-// };
-
-// export default WelcomeScreen;
-
-// src/features/auth/components/WelcomeScreen.tsx
-
-import { LuPawPrint } from "react-icons/lu";
-import Lottie from "lottie-react";
-import peekingCatAnimation from "../assets/hello-cat.json";
-import { Button } from "@/components/ui/button";
+import { LuPawPrint } from 'react-icons/lu';
+import Lottie from 'lottie-react';
+import peekingCatAnimation from '../assets/hello-cat.json';
+import { Button } from '@/components/ui/button';
 
 type WelcomeScreenProps = {
   onGetStarted: () => void;
@@ -54,22 +9,21 @@ type WelcomeScreenProps = {
 
 const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
   return (
-    // تغییر کلیدی: کلاس‌های h-full و justify-center حذف شدند
-    <div className="flex flex-col items-center text-dark-primary text-center px-4">
+    <div className="text-dark-primary mx-auto flex max-w-screen-xl flex-col items-center justify-center px-4 text-center">
       <Lottie
         loop={false}
-        className="w-[300px] h-[300px] xl:w-[600px] xl:h-[600px] xl:-mt-16"
+        className="aspect-square w-full max-w-[300px] md:max-w-[400px] lg:max-w-[500px] xl:-mt-16 xl:max-w-[600px]"
         animationData={peekingCatAnimation}
       />
-      <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-bold mt-10 lg:mt-5 animate-fade-in">
+      <h1 className="animate-fade-in mt-10 text-2xl font-bold md:text-4xl lg:mt-5 lg:text-5xl xl:text-6xl 2xl:text-7xl">
         Welcome to MeowChat!
       </h1>
-      <p className="text-md md:text-lg lg:text-xl xl:text-3xl 2xl:text-6xl text-slate-500 mt-2 animate-fade-in-delay">
+      <p className="text-md animate-fade-in-delay mt-2 max-w-2xl text-slate-500 md:text-lg lg:text-xl xl:text-2xl">
         The purr-fect place to connect.
       </p>
       <Button
         onClick={onGetStarted}
-        className="flex items-center justify-center mt-10 h-10 px-6 text-base md:h-11 md:px-8 md:text-lg 2xl:h-16 2xl:px-14 2xl:text-xl cursor-pointer hover:bg-dark-hover gap-1"
+        className="hover:bg-dark-hover mt-10 flex h-10 cursor-pointer items-center justify-center gap-1 px-6 text-base md:h-11 md:px-8 md:text-lg xl:h-14 xl:px-12 xl:text-xl"
       >
         Get Started
         <LuPawPrint />

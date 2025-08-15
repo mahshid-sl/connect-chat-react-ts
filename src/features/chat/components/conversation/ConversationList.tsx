@@ -1,6 +1,6 @@
-import ConversationListHeader from "./ConversationListHeader";
-import ConversationListLayout from "./ConversationListLayout";
-import UserChat from "./UserChat";
+import ConversationListHeader from './ConversationListHeader';
+import ConversationListLayout from '../layout/ConversationListLayout';
+import UserChat from '../UserChat';
 
 export default function ConversationList() {
   return (

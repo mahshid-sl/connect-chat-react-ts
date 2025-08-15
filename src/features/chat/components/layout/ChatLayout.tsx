@@ -8,8 +8,8 @@ export default function ChatLayout({
   children,
 }: ChatLayoutProps) {
   return (
-    <div className=" flex h-screen text-foreground">
-      <aside className="w-[320px] md:w-[400px] flex flex-col flex-shrink-0 bg-red-400 ">
+    <div className="text-foreground flex h-screen">
+      <aside className="flex w-[320px] flex-shrink-0 flex-col bg-red-400 md:w-[400px]">
         {conversationList}
       </aside>
       <main className="flex-grow">{children}</main>

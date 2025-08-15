@@ -1,27 +1,35 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Lottie from "lottie-react";
-import pawPrint from "../assets/Paw-Prints.json";
-import { useNavigate } from "react-router-dom";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import Lottie from 'lottie-react';
+import pawPrint from '../assets/Paw-Prints.json';
+import { useNavigate } from 'react-router-dom';
 
 type signupProps = {
   onSwitchToLogin: () => void;
 };
 export default function Signup({ onSwitchToLogin }: signupProps) {
   const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    //TODO: API call for signup
+    navigate('/home');
+  };
+
   return (
-    <section className="flex flex-col  items-center justify-center h-full text-dark-primary text-center px-4 mt-8 ">
+    <section className="text-dark-primary mt-8 flex h-full flex-col items-center justify-center px-4 text-center">
       <Lottie
-        className="w-[10rem] h-[10rem]  md:w-[15rem] md:h-[12rem] md:-mb-30 "
+        className="-mb-20 h-[10rem] w-[10rem] md:-mb-30 md:h-[12rem] md:w-[15rem]"
         animationData={pawPrint}
       />
 
       <form
-        onSubmit={(e) => e.preventDefault()}
-        className="grid w-full max-w-sm md:max-w-md lg:max-w-lg items-center gap-3 "
+        onSubmit={handleSubmit}
+        className="grid w-full max-w-sm items-center gap-3 md:max-w-md lg:max-w-lg"
       >
-        <h1 className="justify-self-start text-2xl font-extrabold mb-8">
+        <h1 className="mb-8 justify-self-start text-2xl font-extrabold">
           Sign up
         </h1>
         {/* username */}
@@ -29,7 +37,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
           Username
         </Label>
         <Input
-          className="bg-gray-50 md:py-5 placeholder:text-sm"
+          className="bg-gray-50 placeholder:text-sm md:py-5"
           type="text"
           id="username"
           placeholder="e.g. Lucy"
@@ -39,7 +47,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
           Email
         </Label>
         <Input
-          className="bg-gray-50 md:py-5 placeholder:text-sm"
+          className="bg-gray-50 placeholder:text-sm md:py-5"
           type="email"
           id="email"
           placeholder="example@gmail.com"
@@ -49,7 +57,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
           password
         </Label>
         <Input
-          className="bg-gray-50  md:py-5 placeholder:text-sm"
+          className="bg-gray-50 placeholder:text-sm md:py-5"
           type="password"
           id="password"
           placeholder="password"
@@ -57,18 +65,18 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
 
         {/* Sign up btn */}
         <Button
-          onClick={() => navigate("/home")}
-          className="md:text-lg md:py-5 cursor-pointer hover:bg-dark-hover"
+          type="submit"
+          className="hover:bg-dark-hover cursor-pointer transition-colors duration-200 md:py-5 md:text-lg"
         >
           Sign up
         </Button>
-        <p className="flex items-center justify-center gap-2 text-dark">
+        <p className="text-dark flex items-center justify-center gap-2">
           Already have an account?
           <span
             onClick={onSwitchToLogin}
-            className="text-dark-primary font-bold cursor-pointer"
+            className="text-dark-primary cursor-pointer font-bold"
           >
-            {" "}
+            {' '}
             Sign in
           </span>
         </p>

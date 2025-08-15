@@ -1,13 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import ScrollToTop from './components/shared/ScrollToTop';
 
-const AuthPage = lazy(() => import("./pages/AuthPage"));
-const HomePage = lazy(() => import("./pages/HomePage"));
+const AuthPage = lazy(() => import('./pages/AuthPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="w-full h-screen font-display overflow-hidden">
+      <ScrollToTop />
+      <div className="font-display min-h-screen w-full">
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<AuthPage />} />
@@ -18,3 +20,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

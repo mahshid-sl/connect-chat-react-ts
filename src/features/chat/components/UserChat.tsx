@@ -1,10 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { RiCheckDoubleLine } from "react-icons/ri";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { RiCheckDoubleLine } from 'react-icons/ri';
 
 export default function UserChat() {
   return (
-    <div className="flex justify-center items-center space-x-4 p-3  m-3 rounded bg-gray-50 hover:bg-gray-100 cursor-pointer ">
+    <div className="m-3 flex cursor-pointer items-center justify-center space-x-4 rounded bg-gray-50 p-3 hover:bg-gray-100">
       {/* <Avatar /> */}
       <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" />
@@ -12,14 +12,14 @@ export default function UserChat() {
       </Avatar>
 
       {/* chatInfo */}
-      <div className="flex-1 space-y-1 ">
+      <div className="flex-1 space-y-1">
         {/* username */}
-        <div className="flex justify-between  username items-start">
+        <div className="username flex items-start justify-between">
           <div className="text-sm font-bold">
             <span> user name</span>
           </div>
 
-          <div className="flex items-center text-sm text-muted-foreground gap-1.5">
+          <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
             <span>
               <RiCheckDoubleLine size={18} />
             </span>
@@ -27,9 +27,9 @@ export default function UserChat() {
           </div>
         </div>
         {/* chat message */}
-        <div className=" flex justify-between items-centerchat-message text-sm font-normal text-muted-foreground">
-          <div className="message line-clamp-1 ">
-            {" "}
+        <div className="items-centerchat-message text-muted-foreground flex justify-between text-sm font-normal">
+          <div className="message line-clamp-1">
+            {' '}
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet
             molestiae sequi, vitae minima inventore magnam maxime soluta
             dolores, nemo aperiam quibusdam officiis id consequuntur eius nulla
