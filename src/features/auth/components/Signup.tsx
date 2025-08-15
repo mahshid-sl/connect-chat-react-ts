@@ -37,6 +37,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
           Username
         </Label>
         <Input
+          required
           className="bg-gray-50 placeholder:text-sm md:py-5"
           type="text"
           id="username"
@@ -47,6 +48,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
           Email
         </Label>
         <Input
+          required
           className="bg-gray-50 placeholder:text-sm md:py-5"
           type="email"
           id="email"
@@ -57,6 +59,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
           password
         </Label>
         <Input
+          required
           className="bg-gray-50 placeholder:text-sm md:py-5"
           type="password"
           id="password"
