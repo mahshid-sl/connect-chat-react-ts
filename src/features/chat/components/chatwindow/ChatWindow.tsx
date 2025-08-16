@@ -4,6 +4,11 @@ import ChatMessageList from './ChatMessageList';
 
 import defaultChatPattern from '../../../chat/assets/defaultChatPattern.webp';
 
+const messages: { id: string; text: string; sender: 'me' | 'other' }[] = [
+  { id: '1', text: 'Hello!', sender: 'me' },
+  { id: '2', text: 'Hi there!', sender: 'other' },
+];
+
 export default function ChatWindow() {
   return (
     <div className="relative flex h-full w-full flex-col">
@@ -20,10 +25,10 @@ export default function ChatWindow() {
         <ChatHeader />
 
         <div className="flex-grow overflow-y-auto">
-          <ChatMessageList />
+          <ChatMessageList messages={messages} />
         </div>
 
-        <ChatInput />
+        <ChatInput onSend={(message) => console.log(message)} />
       </div>
     </div>
   );

@@ -4,8 +4,9 @@ import ConversationList from '@/features/chat/components/conversation/Conversati
 
 export default function HomePage() {
   return (
-    <ChatLayout conversationList={<ConversationList />}>
-      <ChatWindow />
-    </ChatLayout>
+    <ChatLayout
+      conversationList={<ConversationList />}
+      chatWindow={<ChatWindow />}
+    />
   );
 }
