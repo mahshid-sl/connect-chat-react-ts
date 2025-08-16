@@ -4,7 +4,6 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
 import UserProfile from '../UserProfile';
@@ -24,15 +23,15 @@ export default function ConversationListHeader() {
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
-              <SheetTitle>
+              <div className="flex items-center gap-2">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <span> user name</span>
-              </SheetTitle>
+                <span className="font-medium"> user name</span>
+              </div>
             </SheetHeader>
-            <UserProfile /> {/* محتوای پروفایل اینجا قرار می‌گیرد */}
+            <UserProfile />
           </SheetContent>
         </Sheet>
         <h1 className="flex items-center gap-0.5 text-xl font-bold">
@@ -43,8 +42,7 @@ export default function ConversationListHeader() {
       {/* ============ */}
 
       {/* search bar*/}
-      <div className="relative">
-        {' '}
+      <div className="rounded-md bg-gray-50 p-1">
         <SearchBar />
       </div>
     </div>
