@@ -25,6 +25,7 @@ const chats = [
     unreadCount: 1,
   },
 ];
+
 export default function ConversationList() {
   return (
     <ConversationListLayout header={<ConversationListHeader />}>

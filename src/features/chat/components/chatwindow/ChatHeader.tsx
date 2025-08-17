@@ -6,7 +6,6 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
 
@@ -27,6 +26,7 @@ import {
   RiPhoneFill,
   RiSearch2Line,
 } from 'react-icons/ri';
+import ContactInfo from '../ContactInfo';
 
 export default function ChatHeader() {
   return (
@@ -43,6 +43,7 @@ export default function ChatHeader() {
           <p className="text-xs text-green-400">Online</p>
         </div>
       </div>
+
       <div className="flex items-center gap-2">
         {/* search and phone call */}
         <Button className="cursor-pointer" variant="ghost" size="icon">
@@ -61,20 +62,21 @@ export default function ChatHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <SheetHeader>
-              <SheetTitle className="flex items-center gap-5">
+            <SheetHeader className="border-b border-gray-300">
+              <div className="flex items-center gap-2">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col gap-1.5">
-                  <span> user info</span>
+                  <span> user name</span>
                   <span className="text-xs text-gray-500">
                     last seen 2 minutes ago
                   </span>
                 </div>
-              </SheetTitle>
+              </div>
             </SheetHeader>
+            <ContactInfo />
           </SheetContent>
         </Sheet>
 
