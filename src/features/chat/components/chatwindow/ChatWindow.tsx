@@ -6,7 +6,8 @@ import defaultChatPattern from '../../../chat/assets/defaultChatPattern.webp';
 
 const messages: { id: string; text: string; sender: 'me' | 'other' }[] = [
   { id: '1', text: 'Hello!', sender: 'me' },
-  { id: '2', text: 'Hi there!', sender: 'other' },
+  { id: '2', text: 'Hi there! cat1', sender: 'other' },
+  { id: '3', text: 'heheh cat6', sender: 'other' },
 ];
 
 export default function ChatWindow() {

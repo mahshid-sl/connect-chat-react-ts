@@ -1,3 +1,5 @@
+import EmojiWrapper from '@/components/shared/EmojiWrapper';
+
 type ChatMessageListProps = {
   messages: {
     id: string;
@@ -25,7 +27,7 @@ export default function ChatMessageList({
                 : 'text-dark bg-gray-100'
             }`}
           >
-            {msg.text}
+            <EmojiWrapper text={msg.text} />
           </div>
         ))
       )}

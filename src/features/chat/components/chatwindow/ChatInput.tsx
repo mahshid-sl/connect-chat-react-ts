@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Smile, Paperclip, Send } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
 import type { EmojiClickData } from 'emoji-picker-react';
+import { catEmojis } from '@/data/catEmoji';
 
 type ChatInputProps = {
   onSend: (message: string) => void;
@@ -14,7 +15,9 @@ export default function ChatInput({ onSend }: ChatInputProps) {
   const [showEmoji, setShowEmoji] = useState(false);
 
   const onEmojiClick = (emojiObject: EmojiClickData) => {
-    setMessage((prev) => prev + emojiObject.emoji);
+    const cat = catEmojis.find((c) => c.names.includes(emojiObject.names[0]));
+
+    setMessage((prev) => prev + (cat ? cat.names[0] : emojiObject.emoji));
   };
 
   const handleSend = () => {
@@ -26,7 +29,7 @@ export default function ChatInput({ onSend }: ChatInputProps) {
   return (
     <div className="flex-shrink-0 border-t bg-white p-4">
       <div className="flex items-center gap-4 rounded-lg bg-white p-2">
-        {/* Emoji Picker */}
+        {/* Emoji Button */}
         {
           <Button
             onClick={() => setShowEmoji((prev) => !prev)}
@@ -38,8 +41,14 @@ export default function ChatInput({ onSend }: ChatInputProps) {
         }
 
         {showEmoji && (
-          <div className="absolute bottom-12 left-0 z-50">
-            <EmojiPicker onEmojiClick={onEmojiClick} />
+          <div className="absolute bottom-20 left-0 z-50">
+            <EmojiPicker
+              onEmojiClick={onEmojiClick}
+              customEmojis={catEmojis}
+              lazyLoadEmojis
+              previewConfig={{ showPreview: false }}
+              searchDisabled={false}
+            />
           </div>
         )}
 
