@@ -5,16 +5,40 @@ import Lottie from 'lottie-react';
 import pawPrint from '../assets/Paw-Prints.json';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import validator from 'validator';
+import * as z from 'zod';
+
 type LoginProps = {
   onSwitchToSignup: () => void;
 };
 
+const loginSchema = z.object({
+  email: z.string().refine((value) => validator.isEmail(value), {
+    message: 'Invalid email address',
+  }),
+
+  password: z
+    .string()
+    .min(6, 'Password must be at least 6 characters long')
+    .max(20, 'Password must be at most 20 characters long'),
+});
+
 export default function Login({ onSwitchToSignup }: LoginProps) {
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: اعتبارسنجی با react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    console.log(data);
+    // TODO: API call for login
     navigate('/home');
   };
 
@@ -26,7 +50,7 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
       />
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="mt-6 grid w-full max-w-sm items-center gap-3 md:max-w-md lg:max-w-lg"
       >
         <h1 className="mb-8 justify-self-start text-2xl font-extrabold">
@@ -38,24 +62,29 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
           Email
         </Label>
         <Input
-          required
+          {...register('email')}
           className="bg-gray-50 placeholder:text-sm md:py-5 md:placeholder:text-base"
           type="email"
           id="email"
           placeholder="Enter your email"
         />
-
+        <p className="text-left text-sm text-red-500">
+          {errors.email?.message}
+        </p>
         {/* Password */}
         <Label className="md:text-lg" htmlFor="password">
           Password
         </Label>
         <Input
-          required
+          {...register('password')}
           className="bg-gray-50 placeholder:text-sm md:py-5 md:placeholder:text-base"
           type="password"
           id="password"
           placeholder="Enter your password"
         />
+        <p className="text-left text-sm text-red-500">
+          {errors.password?.message}
+        </p>
 
         {/* Forgot Password */}
         <Link
