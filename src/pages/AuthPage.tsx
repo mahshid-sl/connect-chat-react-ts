@@ -5,7 +5,7 @@ import WelcomeScreen from '@/features/auth/components/WelcomeScreen';
 import Signup from '@/features/auth/components/Signup';
 import Login from '@/features/auth/components/Login';
 
-type View = 'welcome' | 'signup' | 'login' | 'forgotPassword';
+type View = 'welcome' | 'signup' | 'login';
 
 const AuthPage = () => {
   const [view, setView] = useState<View>('welcome');

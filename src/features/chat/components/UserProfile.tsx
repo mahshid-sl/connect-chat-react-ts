@@ -64,7 +64,7 @@ export default function UserProfile() {
               <Input id="phone" placeholder="e.g. +123456789" />
             </div>
 
-            {/* Dark mode (فقط UI) */}
+            {/* Dark mode (UI) */}
             <div className="flex items-center justify-between gap-2">
               <Label htmlFor="dark-mode" className="flex items-center gap-2">
                 <RiMoonLine size={18} /> Night Mode
