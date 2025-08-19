@@ -41,7 +41,7 @@ export default function ChatInput({ onSend }: ChatInputProps) {
         }
 
         {showEmoji && (
-          <div className="absolute bottom-20 left-0 z-50">
+          <div className="absolute bottom-15 left-0 z-50">
             <EmojiPicker
               onEmojiClick={onEmojiClick}
               customEmojis={catEmojis}
