@@ -8,6 +8,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { signIn } from '../services/auth';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import Loader from '@/components/shared/Loader';
 
 type LoginProps = {
   onSwitchToSignup: () => void;
@@ -23,6 +27,7 @@ const loginSchema = z.object({
 });
 
 export default function Login({ onSwitchToSignup }: LoginProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -33,10 +38,25 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
-    // TODO: API call for login
-    navigate('/home');
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    setIsLoading(true);
+    try {
+      const { data: userData, error } = await signIn(data);
+
+      if (error) {
+        toast.error(error.message || 'Login failed. Please try again.');
+        return;
+      }
+      if (userData?.user) {
+        toast.success('Login successful!');
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -64,6 +84,7 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
           type="email"
           id="email"
           placeholder="Enter your email"
+          disabled={isLoading}
         />
         <p className="text-left text-sm text-red-500">
           {errors.email?.message}
@@ -78,6 +99,7 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
           type="password"
           id="password"
           placeholder="Enter your password"
+          disabled={isLoading}
         />
         <p className="text-left text-sm text-red-500">
           {errors.password?.message}
@@ -93,9 +115,11 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
 
         {/* Login btn */}
         <Button
+          disabled={isLoading}
           type="submit"
-          className="hover:bg-dark-hover cursor-pointer md:py-5 md:text-lg"
+          className="hover:bg-dark-hover flex cursor-pointer md:py-5 md:text-lg"
         >
+          {isLoading && <Loader />}
           Sign in
         </Button>
 
