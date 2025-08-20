@@ -7,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import validator from 'validator';
 import * as z from 'zod';
 
 type LoginProps = {
@@ -15,9 +14,7 @@ type LoginProps = {
 };
 
 const loginSchema = z.object({
-  email: z.string().refine((value) => validator.isEmail(value), {
-    message: 'Invalid email address',
-  }),
+  email: z.string().email('Invalid email address'),
 
   password: z
     .string()

@@ -7,16 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import validator from 'validator';
 
 const signupSchema = z.object({
   username: z
     .string()
     .min(2, 'Username must be at least 2 characters long')
     .max(50, 'Username must be at most 50 characters long'),
-  email: z.string().refine((value) => validator.isEmail(value), {
-    message: 'Invalid email address',
-  }),
+  email: z.string().email('Invalid email address'),
 
   password: z
     .string()
