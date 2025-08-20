@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { signUp } from '../services/auth';
 
 const signupSchema = z.object({
   username: z
@@ -38,6 +39,8 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
   const onSubmit = (data: z.infer<typeof signupSchema>) => {
     console.log(data);
     //TODO: API call for signup
+    signUp(data);
+    console.log(signUp(data));
     navigate('/home');
   };
 
