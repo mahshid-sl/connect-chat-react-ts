@@ -29,3 +29,14 @@ export const signIn = async ({ email, password }: AuthCredentials) => {
 
   return { data, error };
 };
+
+// TODO
+// ========Sign Out========
+
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  return { error };
+};
+
+// TODO
+// ========Reset password========

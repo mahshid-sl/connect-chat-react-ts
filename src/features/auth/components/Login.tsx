@@ -44,7 +44,7 @@ export default function Login({ onSwitchToSignup }: LoginProps) {
       const { data: userData, error } = await signIn(data);
 
       if (error) {
-        toast.error(error.message || 'Login failed. Please try again.');
+        toast.error(`Email or password is incorrect`);
         return;
       }
       if (userData?.user) {
