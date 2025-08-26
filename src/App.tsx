@@ -4,6 +4,7 @@ import ScrollToTop from './components/shared/ScrollToTop';
 import { Toaster } from 'sonner';
 import { AuthProvider } from './features/auth/context/AuthContext';
 import ProtectedRoute from './features/auth/components/ProtectedRoute';
+
 const AuthPage = lazy(() => import('./pages/AuthPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));

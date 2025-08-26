@@ -32,6 +32,7 @@ export default function ChatInput({ onSend }: ChatInputProps) {
         {/* Emoji Button */}
         {
           <Button
+            type="button"
             onClick={() => setShowEmoji((prev) => !prev)}
             variant="ghost"
             size="icon"
@@ -57,13 +58,19 @@ export default function ChatInput({ onSend }: ChatInputProps) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type a message..."
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              handleSend();
+            }
+          }}
           className="text-dark border-none bg-gray-100 placeholder:text-xs focus-visible:ring-0 focus-visible:ring-offset-0 md:placeholder:text-sm lg:placeholder:text-base"
         />
-        <Button variant="ghost" size="icon">
+        <Button type="button" variant="ghost" size="icon">
           <Paperclip className="h-6 w-6" />
         </Button>
         <Button
+          type="button"
           size="icon"
           className="bg-primary rounded-full"
           onClick={handleSend}

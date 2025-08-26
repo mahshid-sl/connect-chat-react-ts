@@ -3,14 +3,41 @@ import ChatInput from './ChatInput';
 import ChatMessageList from './ChatMessageList';
 
 import defaultChatPattern from '../../../chat/assets/defaultChatPattern.webp';
+import useGetMessages from '../../hooks/useGetMessages';
+import Loader from '@/components/shared/Loader';
+import useSendMessage from '../../hooks/useSendMessage';
 
-const messages: { id: string; text: string; sender: 'me' | 'other' }[] = [
-  { id: '1', text: 'Hello!', sender: 'me' },
-  { id: '2', text: 'Hi there! cat1', sender: 'other' },
-  { id: '3', text: 'heheh cat6', sender: 'other' },
-];
+type ChatWindowProps = {
+  conversationId: string;
+  currentUserId: string;
+};
 
-export default function ChatWindow() {
+export default function ChatWindow({
+  conversationId,
+  currentUserId,
+}: ChatWindowProps) {
+  const {
+    data: messages,
+    isPending,
+    isError,
+    error,
+  } = useGetMessages(conversationId);
+
+  // Implement message sending functionality
+  const { mutate: sendMessage, isPending: isSending } = useSendMessage();
+
+  if (isPending && !messages) return <Loader />;
+
+  if (isError)
+    return <div className="p-4 text-red-500">Error: {error.message}</div>;
+
+  const uiMessages = (messages ?? []).map((m) => ({
+    id: m.id,
+    text: m.text,
+    sender:
+      m.sender_id === currentUserId ? ('me' as const) : ('other' as const),
+  }));
+
   return (
     <div className="relative flex h-full w-full flex-col">
       {/* ====wallpaper=== */}
@@ -24,12 +51,18 @@ export default function ChatWindow() {
 
       <div className="relative z-10 flex h-full w-full flex-col">
         <ChatHeader />
-
         <div className="flex-grow overflow-y-auto">
-          <ChatMessageList messages={messages} />
+          <ChatMessageList messages={uiMessages} />
         </div>
-
-        <ChatInput onSend={(message) => console.log(message)} />
+        <ChatInput
+          onSend={(message) =>
+            sendMessage({
+              conversationId,
+              senderId: currentUserId,
+              text: message,
+            })
+          }
+        />
       </div>
     </div>
   );

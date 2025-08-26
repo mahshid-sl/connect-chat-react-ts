@@ -3,12 +3,13 @@ import { Badge } from '@/components/ui/badge';
 import { RiCheckDoubleLine } from 'react-icons/ri';
 
 type UserChatProps = {
-  id: number;
+  id: string;
   name: string;
   lastMessage: string;
   time?: string;
   unreadCount?: number;
   avatarUrl?: string;
+  onClick: () => void;
 };
 
 export default function UserChat({
@@ -17,9 +18,13 @@ export default function UserChat({
   time = '10:43 AM',
   unreadCount = 0,
   avatarUrl = 'https://github.com/shadcn.png',
+  onClick,
 }: UserChatProps) {
   return (
-    <div className="m-3 flex cursor-pointer items-center justify-start gap-x-3 rounded bg-gray-50 p-3 transition-colors hover:bg-gray-100">
+    <div
+      className="m-3 flex cursor-pointer items-center justify-start gap-x-3 rounded bg-gray-50 p-3 transition-colors hover:bg-gray-100"
+      onClick={onClick}
+    >
       {/* <Avatar /> */}
       <Avatar>
         <AvatarImage src={avatarUrl} />
