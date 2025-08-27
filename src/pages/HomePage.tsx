@@ -15,7 +15,10 @@ export default function HomePage() {
   return (
     <ChatLayout
       conversationList={
-        <ConversationList onSelectConversation={setConversationId} />
+        <ConversationList
+          currentUserId={user.id}
+          onSelectConversation={setConversationId}
+        />
       }
       chatWindow={
         conversationId ? (
