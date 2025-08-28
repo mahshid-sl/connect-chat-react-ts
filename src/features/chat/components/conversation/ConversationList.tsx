@@ -3,6 +3,7 @@ import ConversationListLayout from '../layout/ConversationListLayout';
 import UserChat from '../UserChat';
 import useGetUsers from '../../hooks/useGetUsers';
 import Loader from '@/components/shared/Loader';
+import useGetOrCreateConversation from '../../hooks/useGetOrCreateConversation';
 
 type ConversationListProps = {
   onSelectConversation: (id: string) => void;
@@ -14,6 +15,19 @@ export default function ConversationList({
   currentUserId,
 }: ConversationListProps) {
   const { data: users = [], isLoading } = useGetUsers(currentUserId);
+
+  const { mutate: getOrCreateConversation } = useGetOrCreateConversation();
+
+  function handleSelectUser(otherUserId: string) {
+    getOrCreateConversation(
+      { currentUserId, otherUserId },
+      {
+        onSuccess: (conv) => {
+          onSelectConversation(conv.id);
+        },
+      },
+    );
+  }
 
   if (isLoading) return <Loader />;
 
@@ -30,7 +44,7 @@ export default function ConversationList({
             id={u.id}
             name={u.name}
             lastMessage=""
-            onClick={() => onSelectConversation(u.id)}
+            onClick={() => handleSelectUser(u.id)}
           />
         ))
       )}
