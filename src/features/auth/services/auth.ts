@@ -12,7 +12,7 @@ export const signUp = async ({
     password,
     options: {
       data: {
-        username,
+        username: username,
       },
     },
   });
