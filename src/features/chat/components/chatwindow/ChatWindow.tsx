@@ -26,7 +26,7 @@ export default function ChatWindow({
   // Implement message sending functionality
   const { mutate: sendMessage, isPending: isSending } = useSendMessage();
 
-  if (isPending && !messages) return <Loader />;
+  if (isPending) return <Loader />;
 
   if (isError)
     return <div className="p-4 text-red-500">Error: {error.message}</div>;
