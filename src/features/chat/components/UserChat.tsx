@@ -15,7 +15,7 @@ type UserChatProps = {
 export default function UserChat({
   name,
   lastMessage,
-  time = '10:43 AM',
+  time,
   unreadCount = 0,
   avatarUrl = 'https://github.com/shadcn.png',
   onClick,

@@ -1,9 +1,9 @@
 import ConversationListHeader from './ConversationListHeader';
 import ConversationListLayout from '../layout/ConversationListLayout';
 import UserChat from '../UserChat';
-import useGetUsers from '../../hooks/useGetUsers';
 import Loader from '@/components/shared/Loader';
-import useGetOrCreateConversation from '../../hooks/useGetOrCreateConversation';
+import useConversations from '../../hooks/useConversations';
+import { formatMessageTime } from '@/utils/formatMessageTime';
 
 type ConversationListProps = {
   onSelectConversation: (id: string) => void;
@@ -14,40 +14,43 @@ export default function ConversationList({
   onSelectConversation,
   currentUserId,
 }: ConversationListProps) {
-  const { data: users = [], isLoading } = useGetUsers(currentUserId);
-
-  const { mutate: getOrCreateConversation } = useGetOrCreateConversation();
-
-  function handleSelectUser(otherUserId: string) {
-    getOrCreateConversation(
-      { currentUserId, otherUserId },
-      {
-        onSuccess: (conv) => {
-          onSelectConversation(conv.id);
-        },
-      },
-    );
-  }
+  const { data: conversations = [], isLoading } =
+    useConversations(currentUserId);
 
   if (isLoading) return <Loader />;
 
+  if (conversations.length === 0) {
+    return (
+      <div className="text-muted-foreground p-4 text-center">
+        No conversations yet.
+      </div>
+    );
+  }
+
   return (
     <ConversationListLayout header={<ConversationListHeader />}>
-      {users.length === 0 ? (
-        <div className="text-muted-foreground p-4 text-center">
-          No conversations found.
-        </div>
-      ) : (
-        users.map((u) => (
-          <UserChat
-            key={u.id}
-            id={u.id}
-            name={u.name}
-            lastMessage=""
-            onClick={() => handleSelectUser(u.id)}
-          />
-        ))
-      )}
+      <div>
+        {conversations.map((conv) => {
+          const otherUserId = conv.participants.find(
+            (id: string) => id !== currentUserId,
+          );
+
+          return (
+            <UserChat
+              key={conv.id}
+              id={conv.id}
+              name={conv.other_user?.name || 'Unknown'}
+              lastMessage={conv.last_message}
+              time={formatMessageTime(conv.last_message_time)}
+              unreadCount={0}
+              avatarUrl={
+                conv.other_user?.avatar_url || 'https://github.com/shadcn.png'
+              }
+              onClick={() => onSelectConversation(conv.id)}
+            />
+          );
+        })}
+      </div>
     </ConversationListLayout>
   );
 }
