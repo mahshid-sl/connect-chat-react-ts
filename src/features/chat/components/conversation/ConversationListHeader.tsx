@@ -25,8 +25,17 @@ import {
   RiLogoutBoxRLine,
   RiLogoutCircleRLine,
 } from 'react-icons/ri';
+import useProfile from '../../hooks/useProfile';
 
-export default function ConversationListHeader() {
+type ConversationListHeaderProps = {
+  currentUserId: string;
+};
+
+export default function ConversationListHeader({
+  currentUserId,
+}: ConversationListHeaderProps) {
+  const { profile } = useProfile(currentUserId);
+
   return (
     <div className="flex flex-col gap-4">
       {/*=== sheet btn / slide ===*/}
@@ -42,10 +51,16 @@ export default function ConversationListHeader() {
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarImage
+                      src={
+                        profile?.avatar_url || 'https://github.com/shadcn.png'
+                      }
+                    />
+                    <AvatarFallback>
+                      {profile?.name?.slice(0, 2).toUpperCase() || 'CN'}
+                    </AvatarFallback>
                   </Avatar>
-                  <span className="font-medium"> user name</span>
+                  <span className="font-medium">{profile?.name || 'User'}</span>
                 </div>
                 {/* =====drop down===== */}
                 <div className="mr-3 flex">
@@ -75,7 +90,7 @@ export default function ConversationListHeader() {
                 </div>
               </div>
             </SheetHeader>
-            <UserProfile />
+            <UserProfile currentUserId={currentUserId} />
           </SheetContent>
         </Sheet>
         <h1 className="flex items-center gap-0.5 text-xl font-bold">

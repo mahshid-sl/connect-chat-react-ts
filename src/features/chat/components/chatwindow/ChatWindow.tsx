@@ -59,18 +59,21 @@ export default function ChatWindow({
     }
   }, [initialMessages, currentUserId]);
 
+  // TODO: tighten RLS policies for Messages table (only participants should read/write)
+
   // mount realtime_listen to inserts
   useEffect(() => {
     console.log('🔔 Setting up realtime for conversation:', conversationId);
 
     const channel = supabase
-      .channel('messages-listener')
+      .channel(`messages-${conversationId}`)
       .on(
         'postgres_changes',
         {
           event: 'INSERT',
           schema: 'public',
           table: 'Messages',
+          filter: `conversation_id=eq.${conversationId}`,
         },
         (payload) => {
           console.log('📩 REALTIME EVENT:', payload);

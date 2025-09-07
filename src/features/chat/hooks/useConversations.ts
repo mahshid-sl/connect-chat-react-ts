@@ -2,7 +2,7 @@ import supabase from '@/lib/supabaseClient';
 import { useQuery } from '@tanstack/react-query';
 
 // Fetch user profile information
-const fetchProfile = async (userId: string) => {
+export const fetchProfile = async (userId: string) => {
   const { data, error } = await supabase
     .from('Profiles')
     .select('id, name, avatar_url')

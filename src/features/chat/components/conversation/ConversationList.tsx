@@ -28,7 +28,9 @@ export default function ConversationList({
   }
 
   return (
-    <ConversationListLayout header={<ConversationListHeader />}>
+    <ConversationListLayout
+      header={<ConversationListHeader currentUserId={currentUserId} />}
+    >
       <div>
         {conversations.map((conv) => {
           const otherUserId = conv.participants.find(
