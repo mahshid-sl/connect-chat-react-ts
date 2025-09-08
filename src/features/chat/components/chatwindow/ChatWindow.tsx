@@ -39,7 +39,7 @@ export default function ChatWindow({
   const [messages, setMessages] = useState<UIMessage[]>([]);
 
   // Implement message sending functionality
-  const { mutate: sendMessage, isPending: isSending } = useSendMessage();
+  const { mutate: sendMessage } = useSendMessage();
 
   // Initial messages effect
   useEffect(() => {
@@ -130,7 +130,10 @@ export default function ChatWindow({
       {/* ============== */}
 
       <div className="relative z-10 flex h-full w-full flex-col">
-        <ChatHeader />
+        <ChatHeader
+          currentUserId={currentUserId}
+          conversationId={conversationId}
+        />
         <div className="flex-grow overflow-y-auto">
           <ChatMessageList messages={messages} />
         </div>

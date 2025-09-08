@@ -27,19 +27,42 @@ import {
   RiSearch2Line,
 } from 'react-icons/ri';
 import ContactInfo from '../ContactInfo';
+import useConversations from '../../hooks/useConversations';
 
-export default function ChatHeader() {
+type ChatHeaderProps = {
+  currentUserId: string;
+  conversationId: string;
+};
+
+export default function ChatHeader({
+  currentUserId,
+  conversationId,
+}: ChatHeaderProps) {
+  const { data: conversations = [] } = useConversations(currentUserId);
+  console.log(`conversations♥️:`, conversations[1]);
+
+  const currentConversation = conversations.find(
+    (conv) => conv.id === conversationId,
+  );
+
+  const otherUser = currentConversation?.other_user;
+
   return (
     <header className="flex shrink-0 items-center justify-between border-b border-gray-50 bg-white p-4">
       <div className="flex items-center gap-4">
         {/* user avatar */}
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage
+            src={otherUser?.avatar_url || 'https://github.com/shadcn.png'}
+            alt="User"
+          />
+          <AvatarFallback>{otherUser?.name.slice(0, 2) || '??'}</AvatarFallback>
         </Avatar>
         {/* user status and name */}
         <div>
-          <p className="text-dark font-bold">user</p>
+          <p className="text-dark font-bold">
+            {otherUser?.name || 'Unknown User'}
+          </p>
           <p className="text-xs text-green-400">Online</p>
         </div>
       </div>
