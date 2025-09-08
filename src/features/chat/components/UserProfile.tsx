@@ -25,10 +25,7 @@ import useUpdateProfileRPC from '../hooks/useUpdateProfileRPC ';
 const profileSchema = z.object({
   name: z.string().min(2, 'name must be at least 2 characters long'),
   username: z.string().min(3, 'username must be at least 3 characters long'),
-  bio: z
-    .string()
-    .max(150, 'bio must be at most 150 characters long')
-    .optional(),
+  bio: z.string().max(60, 'bio must be at most 60 characters long').optional(),
   phone_number: z
     .string()
     .regex(/^\+?[1-9]\d{1,14}$/, 'phone number is not valid')
