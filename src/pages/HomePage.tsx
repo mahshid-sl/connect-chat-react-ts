@@ -8,16 +8,24 @@ import { useState } from 'react';
 export default function HomePage() {
   const { user, loading } = useAuth();
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<'list' | 'chat'>('list');
 
   if (loading) return <Loader />;
   if (!user) return <div>Please login</div>;
 
+  const handleSelectConversation = (id: string) => {
+    setConversationId(id);
+    setActiveView('chat');
+  };
+
   return (
     <ChatLayout
+      activeView={activeView}
+      setActiveView={setActiveView}
       conversationList={
         <ConversationList
           currentUserId={user.id}
-          onSelectConversation={setConversationId}
+          onSelectConversation={handleSelectConversation}
         />
       }
       chatWindow={

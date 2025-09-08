@@ -1,17 +1,18 @@
-import { ArrowLeft, Pencil } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 
 type ChatLayoutProps = {
   conversationList: React.ReactNode;
   chatWindow: React.ReactNode;
+  activeView: 'list' | 'chat';
+  setActiveView: (view: 'list' | 'chat') => void;
 };
 
 export default function ChatLayout({
   conversationList,
   chatWindow,
+  activeView,
+  setActiveView,
 }: ChatLayoutProps) {
-  const [activeView, setActiveView] = useState<'list' | 'chat'>('list');
-
   return (
     <div className="text-foreground flex h-screen">
       {/* Sidebar / Chat List */}
@@ -36,18 +37,6 @@ export default function ChatLayout({
         </div>
         {chatWindow}
       </main>
-
-      {/* open chat button */}
-      {activeView === 'list' && (
-        <div className="fixed right-4 bottom-4 md:hidden">
-          <button
-            onClick={() => setActiveView('chat')}
-            className="rounded-full bg-gray-200 p-4 text-gray-600"
-          >
-            <Pencil size={20} />
-          </button>
-        </div>
-      )}
     </div>
   );
 }
