@@ -33,7 +33,7 @@ export default function ChatWindow({
     isPending,
     isError,
     error,
-  } = useGetMessages(conversationId);
+  } = useGetMessages(conversationId, currentUserId);
 
   // Initialize messages state
   const [messages, setMessages] = useState<UIMessage[]>([]);

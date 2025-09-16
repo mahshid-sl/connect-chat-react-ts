@@ -1,5 +1,6 @@
 import supabase from '@/lib/supabaseClient';
 import { useQuery } from '@tanstack/react-query';
+import type { Message } from '../types/chat.types';
 
 // Fetch user profile information
 export const fetchProfile = async (userId: string) => {
@@ -24,7 +25,7 @@ function useConversations(currentUserId: string) {
           `
           id,
           participants,
-          Messages (id, text, created_at)
+          Messages (id, text, created_at, is_read, receiver_id)
         `,
         )
         .contains('participants', [currentUserId]);
@@ -33,12 +34,24 @@ function useConversations(currentUserId: string) {
 
       const conversations = await Promise.all(
         (data ?? []).map(async (conv) => {
-          const lastMessage = conv.Messages?.sort(
+          const sortedMessages: Message[] = [
+            ...((conv.Messages ?? []) as Message[]),
+          ].sort(
             (a, b) =>
               new Date(b.created_at).getTime() -
               new Date(a.created_at).getTime(),
-          )[0];
+          );
 
+          const lastMessage = sortedMessages[0];
+
+          // unreadCount
+          const unreadCount =
+            conv.Messages?.filter(
+              (msg) =>
+                msg.receiver_id === currentUserId && msg.is_read === false,
+            ).length || 0;
+
+          console.log('Unread count:', unreadCount);
           // Find the other user in the conversation
           const otherUserId = conv.participants.find(
             (id: string) => id !== currentUserId,
@@ -57,11 +70,12 @@ function useConversations(currentUserId: string) {
             last_message: lastMessage?.text || '',
             last_message_time: lastMessage?.created_at || '',
             other_user: otherUserProfile,
+            unread_count: unreadCount,
           };
         }) ?? [],
       );
 
-      console.log('✅ conversations:', conversations);
+      console.log('📨 Conversations with unread:', conversations);
       return conversations;
     },
   });

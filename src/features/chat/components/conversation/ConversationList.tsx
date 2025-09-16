@@ -52,7 +52,7 @@ export default function ConversationList({
                   name={conv.other_user?.name || 'Unknown'}
                   lastMessage={conv.last_message}
                   time={formatMessageTime(conv.last_message_time)}
-                  unreadCount={0}
+                  unreadCount={conv.unread_count || 0}
                   avatarUrl={
                     conv.other_user?.avatar_url ||
                     'https://github.com/shadcn.png'
