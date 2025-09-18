@@ -4,7 +4,8 @@ A real-time one-on-one chat application built with **React**, **TypeScript**, **
 This repo is a small demo for learning — focuses on realtime messaging, user profiles and file uploads.
 
 ---
-![](mewo chat.gif)
+![Demo](./mewoChat.gif)
+
 
 
 ## 🚀 Features
