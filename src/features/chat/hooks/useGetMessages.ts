@@ -3,7 +3,7 @@
 // import type { Message } from '../types/chat.types';
 
 import supabase from '@/lib/supabaseClient';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import type { Message } from '../types/chat.types';
 
 // const useGetMessages = (conversationId: string) => {
@@ -35,9 +35,7 @@ import type { Message } from '../types/chat.types';
 
 // export default useGetMessages;
 
-const useGetMessages = (conversationId: string, currentUserId: string) => {
-  const queryClient = useQueryClient();
-
+const useGetMessages = (conversationId: string) => {
   return useQuery<Message[], Error>({
     queryKey: ['messages', conversationId],
     queryFn: async () => {
@@ -51,32 +49,11 @@ const useGetMessages = (conversationId: string, currentUserId: string) => {
 
       if (error) throw new Error(error.message);
 
-      // ✅ پیام‌های خوانده نشده رو mark کن
-      const unreadMessages = data?.filter(
-        (msg) => msg.receiver_id === currentUserId && !msg.is_read,
-      );
-
-      if (unreadMessages?.length) {
-        await supabase
-          .from('Messages')
-          .update({ is_read: true })
-          .eq('conversation_id', conversationId)
-          .eq('receiver_id', currentUserId)
-          .eq('is_read', false);
-
-        // invalidate کانورسیشن‌ها و خود پیام‌ها
-        queryClient.invalidateQueries({
-          queryKey: ['messages', conversationId],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['conversations', currentUserId],
-        });
-      }
-
       return data ?? [];
     },
     enabled: !!conversationId,
-    staleTime: 15_000,
+    staleTime: 500,
+    refetchOnWindowFocus: true,
   });
 };
 
