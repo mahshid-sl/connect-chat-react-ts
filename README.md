@@ -46,11 +46,34 @@ This repo is a small demo for learning — focuses on realtime messaging, user p
 
 ```bash
 src/
-  ├── components/        # UI components (ChatWindow, ConversationList, etc.)
-  ├── hooks/             # Custom hooks (useSendMessage, useGetMessages, etc.)
-  ├── lib/               # Supabase client
-  ├── types/             # TypeScript types
-  └── pages/             # App pages
+├───assets
+├───components
+│   ├───shared
+│   └───ui
+├───data
+├───features
+│   ├───auth
+│   │   ├───assets
+│   │   ├───components
+│   │   ├───context
+│   │   ├───hooks
+│   │   ├───services
+│   │   └───types
+│   └───chat
+│       ├───assets
+│       ├───components
+│       │   ├───chatwindow
+│       │   ├───conversation
+│       │   └───layout
+│       ├───hooks
+│       ├───services
+│       └───types
+├───hooks
+├───lib
+├───pages
+├───store
+├───types
+└───utils
 
 ⚙️ Installation
 1.Clone the repo:
