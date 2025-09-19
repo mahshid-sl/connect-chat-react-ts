@@ -34,8 +34,28 @@ This repo is a small demo for learning — focuses on realtime messaging, user p
 - TypeScript
 - Supabase (Postgres + Auth + Realtime + Storage)
 - React Query (TanStack Query)
+- Redux toolkit
+- React hook form
+- zod
+- Framer Motion
 - Tailwind CSS
 - ShadCN
+- Date fns
+
+## 📂 Project Structure
+
+```bash
+src/
+  ├── components/        # UI components (ChatWindow, ConversationList, etc.)
+  ├── hooks/             # Custom hooks (useSendMessage, useGetMessages, etc.)
+  ├── lib/               # Supabase client
+  ├── types/             # TypeScript types
+  └── pages/             # App pages
+
+⚙️ Installation
+1.Clone the repo:
+git clone https://github.com/your-username/chat-app.git
+cd chat-app
 
 
 
