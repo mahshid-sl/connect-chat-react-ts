@@ -54,8 +54,66 @@ src/
 
 ⚙️ Installation
 1.Clone the repo:
-git clone https://github.com/your-username/chat-app.git
-cd chat-app
+git clone https://github.com/mahshid-sl/connect-chat-react-ts.git
+cd connect-chat-react-ts
+
+2.Install dependencies:
+npm install
+
+3.Add your Supabase keys:
+Create .env.local and add:
+VITE_SUPABASE_URL=your-project-url
+VITE_SUPABASE_ANON_KEY=your-anon-key
+
+4.Start the dev server:
+npm run dev
+
+## 🗄️ Database Schema
+=========
+Profiles
+=========
+create table public."Profiles" (
+  created_at timestamp with time zone not null default now(),
+  username text null,
+  name text null,
+  bio text null,
+  avatar_url text null,
+  phone_number text null,
+  id uuid not null default auth.uid (),
+  constraint Profiles_pkey primary key (id),
+  constraint Profile_user_name_key unique (username)
+) TABLESPACE pg_default;
+
+=========
+Messages
+=========
+create table public."Messages" (
+  id uuid not null default gen_random_uuid (),
+  created_at timestamp with time zone not null default now(),
+  conversation_id uuid null,
+  sender_id uuid null,
+  text text null default ''::text,
+  is_read boolean null default false,
+  receiver_id uuid null,
+  constraint Messages_pkey primary key (id),
+  constraint Messages_conversation_id_fkey foreign KEY (conversation_id) references "Conversations" (id),
+  constraint Messages_receiver_id_fkey foreign KEY (receiver_id) references "Profiles" (id),
+  constraint Messages_sender_id_fkey foreign KEY (sender_id) references "Profiles" (id)
+) TABLESPACE pg_default;
+
+==============
+Conversations
+==============
+
+create table public."Conversations" (
+  id uuid not null default gen_random_uuid (),
+  created_at timestamp with time zone not null default now(),
+  participants uuid[] null,
+  last_message text null default ''::text,
+  constraint Conversations_pkey primary key (id)
+) TABLESPACE pg_default;
+
+
 
 
 
