@@ -6,7 +6,7 @@ This repo is a small demo for learning — focuses on realtime messaging, user p
 ---
 ## 🎥 Demo
 [watch in Loom](https://www.loom.com/share/06b9c14540b94b48beb27c5190fe1259?sid=08c600bc-3f41-47f7-86ab-9fe14e578c4a)
-
+<div style="position: relative; padding-bottom: 66.66666666666666%; height: 0;"><iframe src="https://www.loom.com/embed/06b9c14540b94b48beb27c5190fe1259?sid=5358064b-d838-41be-b80c-f0df823c80a0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ## 🚀 Features
 
