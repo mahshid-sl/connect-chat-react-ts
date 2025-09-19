@@ -1,5 +1,8 @@
 # 💬 Chat App
 
+⚠️ **Status: Work in Progress (WIP)**  
+This project is currently under development. Some features may not be complete or fully stable.
+
 A real-time one-on-one chat application built with **React**, **TypeScript**, **Supabase** and **React Query**.  
 This repo is a small demo for learning — focuses on realtime messaging, user profiles and file uploads.
 
