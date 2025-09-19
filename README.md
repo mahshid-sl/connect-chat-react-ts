@@ -5,14 +5,7 @@ This repo is a small demo for learning — focuses on realtime messaging, user p
 
 ---
 ## 🎥 Demo
-[watch in Loom](<div>
-    <a href="https://www.loom.com/share/06b9c14540b94b48beb27c5190fe1259">
-      <p>Connect - 19 September 2025 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/06b9c14540b94b48beb27c5190fe1259">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/06b9c14540b94b48beb27c5190fe1259-777a7cb15c8aef36-full-play.gif">
-    </a>
-  </div>)(https://www.loom.com/share/06b9c14540b94b48beb27c5190fe1259?sid=08c600bc-3f41-47f7-86ab-9fe14e578c4a)
+[watch in Loom](https://www.loom.com/share/06b9c14540b94b48beb27c5190fe1259?sid=08c600bc-3f41-47f7-86ab-9fe14e578c4a)
 
 
 ## 🚀 Features
