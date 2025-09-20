@@ -6,6 +6,8 @@ import * as z from 'zod';
 import { toast } from 'sonner';
 import supabase from '@/lib/supabaseClient';
 import { useNavigate } from 'react-router-dom';
+import Loader from '@/components/shared/Loader';
+import { useState } from 'react';
 
 const resetPasswordSchema = z
   .object({
@@ -24,6 +26,7 @@ type ResetPasswordProps = {
 
 export default function ResetPassword() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -38,6 +41,7 @@ export default function ResetPassword() {
   };
 
   const onSubmit = async ({ newPassword }: ResetPasswordProps) => {
+    setIsLoading(true);
     const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
@@ -47,6 +51,7 @@ export default function ResetPassword() {
     } else {
       toast.success('Password updated successfully!');
     }
+    setIsLoading(false);
   };
 
   return (
@@ -64,6 +69,7 @@ export default function ResetPassword() {
             <Input
               {...register('newPassword')}
               type="password"
+              disabled={isLoading}
               placeholder="Enter new password"
               className="mt-1 w-full"
             />
@@ -79,6 +85,7 @@ export default function ResetPassword() {
             <Input
               {...register('confirmPassword')}
               type="password"
+              disabled={isLoading}
               placeholder="Confirm password"
               className="mt-1 w-full"
             />
@@ -88,10 +95,12 @@ export default function ResetPassword() {
           </div>
 
           <div className="button-container flex flex-col space-y-4">
-            <Button type="submit" className="w-full">
+            <Button disabled={isLoading} type="submit" className="w-full">
+              {isLoading && <Loader />}
               Update Password
             </Button>
             <Button
+              disabled={isLoading}
               onClick={handleBackToLogin}
               type="button"
               className="w-full"

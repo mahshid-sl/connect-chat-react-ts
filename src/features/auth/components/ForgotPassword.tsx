@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { resetPassword } from '../../auth/services/auth';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Loader from '@/components/shared/Loader';
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -13,6 +15,7 @@ const forgotPasswordSchema = z.object({
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -26,12 +29,14 @@ export default function ForgotPassword() {
   };
 
   const onSubmit = async ({ email }: { email: string }) => {
+    setIsLoading(true);
     const { error } = await resetPassword(email);
     if (error) {
       toast.error(error.message);
     } else {
       toast.success('Password reset email sent!');
     }
+    setIsLoading(false);
   };
 
   return (
@@ -52,6 +57,7 @@ export default function ForgotPassword() {
             <Input
               {...register('email')}
               type="email"
+              disabled={isLoading}
               placeholder="Enter your email"
               className="mt-1 w-full"
             />
@@ -59,10 +65,12 @@ export default function ForgotPassword() {
           </div>
 
           <div className="button-container flex flex-col space-y-2">
-            <Button type="submit" className="w-full">
+            <Button disabled={isLoading} type="submit" className="w-full">
+              {isLoading && <Loader />}
               Send
             </Button>
             <Button
+              disabled={isLoading}
               onClick={handleBackToLogin}
               type="button"
               className="w-full"

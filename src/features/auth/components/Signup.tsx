@@ -147,7 +147,9 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
             </span>
             Please check your email to verify your account.
           </p>
-          <Button onClick={onSwitchToLogin}>Go to Login</Button>
+          <Button disabled={isLoading} onClick={onSwitchToLogin}>
+            Go to Login
+          </Button>
         </div>
       )}
     </section>
