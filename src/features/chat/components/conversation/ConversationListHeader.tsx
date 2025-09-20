@@ -26,6 +26,8 @@ import {
   RiLogoutCircleRLine,
 } from 'react-icons/ri';
 import useProfile from '../../hooks/useProfile';
+import { signOut } from '@/features/auth/services/auth';
+import { useNavigate } from 'react-router-dom';
 
 type ConversationListHeaderProps = {
   currentUserId: string;
@@ -35,6 +37,16 @@ export default function ConversationListHeader({
   currentUserId,
 }: ConversationListHeaderProps) {
   const { profile } = useProfile(currentUserId);
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    const { error } = await signOut();
+    if (error) {
+      console.error('signout failed', error.message);
+      return;
+    }
+    navigate('/');
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -77,7 +89,10 @@ export default function ConversationListHeader({
                         My Account
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                      <DropdownMenuItem
+                        onClick={handleSignOut}
+                        className="flex cursor-pointer items-center gap-2"
+                      >
                         <RiLogoutBoxRLine size={20} />
                         Log out
                       </DropdownMenuItem>
