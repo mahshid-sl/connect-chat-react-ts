@@ -28,7 +28,7 @@ const profileSchema = z.object({
   bio: z.string().max(60, 'bio must be at most 60 characters long').optional(),
   phone_number: z
     .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, 'phone number is not valid')
+    .regex(/^\+?[0-9]\d{1,14}$/, 'phone number is not valid')
     .optional(),
 });
 
