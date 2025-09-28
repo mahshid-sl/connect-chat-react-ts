@@ -25,9 +25,10 @@ import {
   RiLogoutBoxRLine,
   RiLogoutCircleRLine,
 } from 'react-icons/ri';
-import useProfile from '../../hooks/useProfile';
+import useProfile, { deleteUserFromAuth } from '../../hooks/useProfile';
 import { signOut } from '@/features/auth/services/auth';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 type ConversationListHeaderProps = {
   currentUserId: string;
@@ -37,6 +38,7 @@ export default function ConversationListHeader({
   currentUserId,
 }: ConversationListHeaderProps) {
   const { profile } = useProfile(currentUserId);
+
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -46,6 +48,22 @@ export default function ConversationListHeader({
       return;
     }
     navigate('/');
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const confirmed = window.confirm(
+        'Are you sure you want to delete your account?',
+      );
+      if (!confirmed) return;
+
+      await deleteUserFromAuth(currentUserId);
+      toast.success('Account deleted successfully');
+      navigate('/');
+    } catch (error: unknown) {
+      toast.error('Delete account failed');
+      console.error('Delete account failed:', (error as Error).message);
+    }
   };
 
   return (
@@ -96,7 +114,10 @@ export default function ConversationListHeader({
                         <RiLogoutBoxRLine size={20} />
                         Log out
                       </DropdownMenuItem>
-                      <DropdownMenuItem className="flex cursor-pointer items-center gap-2 text-red-400">
+                      <DropdownMenuItem
+                        onClick={handleDeleteAccount}
+                        className="flex cursor-pointer items-center gap-2 text-red-400"
+                      >
                         <RiDeleteBin7Line size={20} className="text-red-400" />
                         <span className="text-red-400"> Delete Account</span>
                       </DropdownMenuItem>
