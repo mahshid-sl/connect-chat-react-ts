@@ -69,7 +69,6 @@ export const signIn = async ({ email, password }: AuthCredentials) => {
   return { data, error };
 };
 
-// TODO
 // ========Sign Out========
 
 export const signOut = async () => {
@@ -77,7 +76,6 @@ export const signOut = async () => {
   return { error };
 };
 
-// TODO
 // ========Reset password========
 
 export const resetPassword = async (email: string) => {
