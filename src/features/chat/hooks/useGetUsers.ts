@@ -9,7 +9,8 @@ const useGetUsers = (currentUserId: string) => {
       const { data, error } = await supabase
         .from('Profiles')
         .select('*')
-        .neq('id', currentUserId);
+        .neq('id', currentUserId)
+        .neq('name', 'Deleted Account');
       if (error) throw new Error('Network response was not ok');
       return data ?? [];
     },
