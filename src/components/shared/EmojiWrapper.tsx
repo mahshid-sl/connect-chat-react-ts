@@ -8,7 +8,7 @@ const EmojiWrapper = ({ text }: EmojiWrapperProps) => {
   const parts = text.split(/(\s+)/);
 
   return (
-    <span className="inline-flex flex-wrap items-center gap-1">
+    <span className="bg inline-flex flex-wrap items-center gap-1">
       {parts.map((part, index) => {
         const cat = catEmojis.find((e) =>
           e.names.some((name) => name.toLowerCase() === part.toLowerCase()),

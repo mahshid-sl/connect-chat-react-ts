@@ -22,7 +22,7 @@ export default function UserChat({
 }: UserChatProps) {
   return (
     <div
-      className="m-3 flex cursor-pointer items-center justify-start gap-x-3 rounded bg-gray-50 p-3 transition-colors hover:bg-gray-100"
+      className="m-3 flex cursor-pointer items-center justify-start gap-x-3 rounded bg-gray-50 p-3 transition-colors hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
       onClick={onClick}
     >
       {/* <Avatar /> */}
@@ -34,7 +34,7 @@ export default function UserChat({
       {/* chatInfo */}
       <div className="flex-1 space-y-1">
         {/* username */}
-        <div className="username flex items-start justify-between">
+        <div className="username bg flex items-start justify-between">
           <div className="text-sm font-bold">
             <span>{name}</span>
           </div>
@@ -52,7 +52,7 @@ export default function UserChat({
             <span>{lastMessage}</span>
           </div>
           {unreadCount > 0 && (
-            <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">
+            <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums dark:bg-gray-500 dark:text-white">
               {unreadCount}
             </Badge>
           )}

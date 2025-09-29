@@ -14,7 +14,7 @@ export default function ChatMessageList({
   return (
     <div className="flex-1 space-y-4 overflow-y-auto p-4">
       {messages.length === 0 ? (
-        <p className="text-dark-2 text-center text-sm text-shadow-2xs">
+        <p className="text-dark-2 text-center text-sm text-shadow-2xs dark:text-gray-400">
           This is the beginning of your conversation.
         </p>
       ) : (
@@ -23,8 +23,8 @@ export default function ChatMessageList({
             key={msg.id}
             className={`max-w-[50%] rounded-lg p-2 ${
               msg.sender === 'me'
-                ? 'bg-primary ml-auto text-white'
-                : 'text-dark bg-gray-100'
+                ? 'bg-primary ml-auto text-white dark:bg-gray-700 dark:text-white'
+                : 'text-dark bg-gray-100 dark:bg-gray-800 dark:text-white'
             }`}
           >
             <EmojiWrapper text={msg.text} />

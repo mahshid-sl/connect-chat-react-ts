@@ -35,7 +35,7 @@ export default function HomePage() {
         conversationId ? (
           <ChatWindow conversationId={conversationId} currentUserId={user.id} />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gray-100 text-xl text-gray-500">
+          <div className="Select a conversation to start chatting flex h-full items-center justify-center bg-gray-100 text-xl text-gray-500 dark:bg-gray-800 dark:text-gray-400">
             Select a conversation to start chatting
           </div>
         )

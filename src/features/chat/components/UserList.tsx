@@ -55,7 +55,7 @@ export default function UserList({
         {users.map((user) => (
           <div
             key={user.id}
-            className="flex cursor-pointer items-center gap-3 rounded p-2 hover:bg-gray-100"
+            className="flex cursor-pointer items-center gap-3 rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => handleSelectUser(user.id)}
           >
             <Avatar>

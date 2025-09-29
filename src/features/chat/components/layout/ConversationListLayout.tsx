@@ -10,8 +10,8 @@ export default function ConversationListLayout({
   children,
 }: ConversationListLayoutProps) {
   return (
-    <div className="flex h-full min-w-[280px] flex-col border-r bg-white">
-      <header className="flex-shrink-0 border-b border-gray-200 p-4">
+    <div className="flex h-full min-w-[280px] flex-col border-r bg-white dark:bg-gray-900 dark:text-white">
+      <header className="flex-shrink-0 border-b border-gray-200 p-4 dark:border-gray-700">
         {header}
       </header>
 

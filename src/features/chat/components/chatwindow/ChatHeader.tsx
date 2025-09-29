@@ -48,7 +48,7 @@ export default function ChatHeader({
   const otherUser = currentConversation?.other_user;
 
   return (
-    <header className="flex shrink-0 items-center justify-between border-b border-gray-50 bg-white p-4">
+    <header className="flex shrink-0 items-center justify-between border-b border-gray-50 bg-white p-4 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
       <div className="flex items-center gap-4">
         {/* user avatar */}
         <Avatar>
@@ -59,8 +59,8 @@ export default function ChatHeader({
           <AvatarFallback>{otherUser?.name.slice(0, 2) || '??'}</AvatarFallback>
         </Avatar>
         {/* user status and name */}
-        <div>
-          <p className="text-dark font-bold">
+        <div className="dark:text-white">
+          <p className="text-dark font-bold dark:text-white">
             {otherUser?.name || 'Unknown User'}
           </p>
           <p className="text-xs text-green-400">Online</p>
@@ -70,10 +70,10 @@ export default function ChatHeader({
       <div className="flex items-center gap-2">
         {/* search and phone call */}
         <Button className="cursor-pointer" variant="ghost" size="icon">
-          <RiSearch2Line className="h-6 w-6 text-gray-600" />
+          <RiSearch2Line className="h-6 w-6 text-gray-600 dark:text-white" />
         </Button>
         <Button className="cursor-pointer" variant="ghost" size="icon">
-          <RiPhoneFill className="h-6 w-6 text-gray-600" />
+          <RiPhoneFill className="h-6 w-6 text-gray-600 dark:text-white" />
         </Button>
 
         {/* ======= */}
@@ -81,11 +81,11 @@ export default function ChatHeader({
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
-              <RiLayoutRightLine className="h-6 w-6 text-gray-600" />
+              <RiLayoutRightLine className="h-6 w-6 text-gray-600 dark:text-white" />
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <SheetHeader className="border-b border-gray-300">
+            <SheetHeader className="border-b border-gray-300 dark:border-gray-700">
               <div className="flex items-center gap-2">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
@@ -106,7 +106,10 @@ export default function ChatHeader({
         {/* =====drop down===== */}
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <RiMore2Fill size={20} className="h-6 w-6 text-gray-600" />
+            <RiMore2Fill
+              size={20}
+              className="h-6 w-6 text-gray-600 dark:text-white"
+            />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-1">
             <DropdownMenuItem className="flex cursor-pointer items-center gap-2">

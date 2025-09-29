@@ -69,7 +69,7 @@ export default function ConversationList({
         <div className="fixed bottom-6 left-4">
           <button
             onClick={() => setIsUserListOpen(true)}
-            className="rounded-full bg-gray-200 p-4 text-gray-600"
+            className="rounded-full bg-gray-200 p-4 text-gray-600 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
           >
             <Plus size={20} />
           </button>

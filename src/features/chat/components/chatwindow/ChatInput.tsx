@@ -27,8 +27,8 @@ export default function ChatInput({ onSend }: ChatInputProps) {
   };
 
   return (
-    <div className="flex-shrink-0 border-t bg-white p-4">
-      <div className="flex items-center gap-4 rounded-lg bg-white p-2">
+    <div className="flex-shrink-0 border-t bg-white p-4 dark:bg-gray-900 dark:text-white">
+      <div className="flex items-center gap-4 rounded-lg bg-white p-2 dark:bg-gray-900 dark:text-white">
         {/* Emoji Button */}
         {
           <Button
@@ -64,7 +64,7 @@ export default function ChatInput({ onSend }: ChatInputProps) {
               handleSend();
             }
           }}
-          className="text-dark border-none bg-gray-100 placeholder:text-xs focus-visible:ring-0 focus-visible:ring-offset-0 md:placeholder:text-sm lg:placeholder:text-base"
+          className="text-dark border-none bg-gray-100 placeholder:text-xs focus-visible:ring-0 focus-visible:ring-offset-0 md:placeholder:text-sm lg:placeholder:text-base dark:text-white"
         />
         <Button type="button" variant="ghost" size="icon">
           <Paperclip className="h-6 w-6" />

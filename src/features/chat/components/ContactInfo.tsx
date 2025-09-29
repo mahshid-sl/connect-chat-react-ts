@@ -11,9 +11,9 @@ import { AtSign, Image, FileText } from 'lucide-react';
 
 const ContactInfo = () => {
   return (
-    <div className="min-h-screen w-full bg-gray-50 p-4">
-      <div className="mx-auto w-full max-w-sm">
-        <div className="flex max-h-[calc(86vh-2rem)] min-h-0 flex-col rounded-lg bg-white shadow">
+    <div className="min-h-screen w-full bg-gray-50 p-4 dark:bg-gray-900 dark:text-white">
+      <div className="mx-auto w-full max-w-sm dark:border-gray-700">
+        <div className="flex max-h-[calc(86vh-2rem)] min-h-0 flex-col rounded-lg bg-white shadow dark:bg-gray-800 dark:text-white">
           <div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-6">
             {/* Bio */}
             <div className="grid gap-2">

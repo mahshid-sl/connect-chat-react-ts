@@ -20,6 +20,7 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import supabase from '@/lib/supabaseClient';
 import useUpdateProfileRPC from '../hooks/useUpdateProfileRPC ';
+import { useTheme } from '@/context/ThemeContext';
 
 // Profile form validation schema
 const profileSchema = z.object({
@@ -42,6 +43,8 @@ export default function UserProfile({ currentUserId }: UserProfileProps) {
   const { profile, isLoading } = useProfile(currentUserId);
   const { mutate: updateProfileRPC } = useUpdateProfileRPC(currentUserId);
   const [uploading, setUploading] = useState(false);
+
+  const { toggleTheme } = useTheme();
 
   // Form handling
   const {
@@ -125,9 +128,9 @@ export default function UserProfile({ currentUserId }: UserProfileProps) {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 p-4">
-      <div className="mx-auto w-full max-w-sm">
-        <div className="flex max-h-[calc(86vh-2rem)] min-h-0 flex-col rounded-lg bg-white shadow">
+    <div className="min-h-screen w-full bg-gray-50 p-4 dark:bg-gray-900 dark:text-white">
+      <div className="mx-auto w-full max-w-sm dark:bg-gray-900 dark:text-white">
+        <div className="flex max-h-[calc(86vh-2rem)] min-h-0 flex-col rounded-lg bg-white shadow dark:bg-gray-900 dark:text-white">
           <div className="min-h-0 flex-1 space-y-5 overflow-y-auto p-6">
             {/* Avatar */}
             <div className="mb-2 flex flex-col items-center gap-3">
@@ -215,8 +218,7 @@ export default function UserProfile({ currentUserId }: UserProfileProps) {
                 <Label htmlFor="dark-mode" className="flex items-center gap-2">
                   <RiMoonLine size={18} /> Dark Mode
                 </Label>
-                <Switch id="dark-mode" />{' '}
-                {/* You can manage this with context */}
+                <Switch onClick={toggleTheme} id="dark-mode" />
               </div>
 
               <Button type="submit" className="w-full">

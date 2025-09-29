@@ -137,7 +137,7 @@ export default function ConversationListHeader({
       {/* ============ */}
 
       {/* search bar*/}
-      <div className="rounded-md bg-gray-50 p-1">
+      <div className="rounded-md bg-gray-50 p-1 dark:bg-gray-900 dark:text-white">
         <SearchBar />
       </div>
     </div>
