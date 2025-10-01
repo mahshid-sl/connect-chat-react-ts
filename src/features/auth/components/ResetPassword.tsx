@@ -103,7 +103,7 @@ export default function ResetPassword() {
               disabled={isLoading}
               onClick={handleBackToLogin}
               type="button"
-              className="w-full"
+              className="w-full dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
             >
               Back to sign in
             </Button>

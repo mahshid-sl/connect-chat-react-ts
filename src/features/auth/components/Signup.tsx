@@ -121,7 +121,7 @@ export default function Signup({ onSwitchToLogin }: signupProps) {
             <Button
               disabled={isLoading}
               type="submit"
-              className="hover:bg-dark-hover flex cursor-pointer transition-colors duration-200 md:py-5 md:text-lg"
+              className="hover:bg-dark-hover flex cursor-pointer transition-colors duration-200 md:py-5 md:text-lg dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
             >
               {isLoading && <Loader />}
               Sign up

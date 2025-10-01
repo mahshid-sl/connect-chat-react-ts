@@ -23,7 +23,7 @@ const WelcomeScreen = ({ onGetStarted }: WelcomeScreenProps) => {
       </p>
       <Button
         onClick={onGetStarted}
-        className="hover:bg-dark-hover mt-10 flex h-10 cursor-pointer items-center justify-center gap-1 px-6 text-base md:h-11 md:px-8 md:text-lg xl:h-14 xl:px-12 xl:text-xl"
+        className="hover:bg-dark-hover mt-10 flex h-10 cursor-pointer items-center justify-center gap-1 px-6 text-base md:h-11 md:px-8 md:text-lg xl:h-14 xl:px-12 xl:text-xl dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
       >
         Get Started
         <LuPawPrint />
