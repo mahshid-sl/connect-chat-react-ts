@@ -6,7 +6,7 @@ import type { Message } from '../types/chat.types';
 export const fetchProfile = async (userId: string) => {
   const { data, error } = await supabase
     .from('Profiles')
-    .select('id, name, avatar_url')
+    .select('id, name, avatar_url, is_online, last_seen')
     .eq('id', userId)
     .single();
 

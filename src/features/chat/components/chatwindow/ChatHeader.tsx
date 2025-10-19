@@ -28,15 +28,24 @@ import {
 } from 'react-icons/ri';
 import ContactInfo from '../ContactInfo';
 import useConversations from '../../hooks/useConversations';
+import { formatLastSeen } from '@/utils/formatLastSeen';
 
 type ChatHeaderProps = {
   currentUserId: string;
   conversationId: string;
+  isOnline?: boolean;
+  lastSeen?: string;
+  otherUser?: {
+    name?: string;
+    avatar_url?: string;
+  };
 };
 
 export default function ChatHeader({
   currentUserId,
   conversationId,
+  isOnline,
+  lastSeen,
 }: ChatHeaderProps) {
   const { data: conversations = [] } = useConversations(currentUserId);
   console.log(`conversations♥️:`, conversations[1]);
@@ -46,6 +55,8 @@ export default function ChatHeader({
   );
 
   const otherUser = currentConversation?.other_user;
+
+  //TODO------set wallpaper
 
   return (
     <header className="flex shrink-0 items-center justify-between border-b border-gray-50 bg-white p-4 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
@@ -63,7 +74,13 @@ export default function ChatHeader({
           <p className="text-dark font-bold dark:text-white">
             {otherUser?.name || 'Unknown User'}
           </p>
-          <p className="text-xs text-green-400">Online</p>
+          <p
+            className={`text-sm ${
+              isOnline ? 'text-green-500' : 'text-gray-500 dark:text-gray-400'
+            }`}
+          >
+            {formatLastSeen(lastSeen, isOnline, otherUser?.name)}
+          </p>
         </div>
       </div>
 

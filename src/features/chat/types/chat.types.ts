@@ -16,6 +16,8 @@ export type UserProfile = {
   bio: string;
   created_at: string;
   phone_number: string;
+  last_seen: string;
+  is_online: boolean;
 };
 
 export type Conversation = {

@@ -5,12 +5,14 @@ import { useAuth } from '@/features/auth/context/AuthContext';
 import Loader from '@/components/shared/Loader';
 import { useState } from 'react';
 import useRealtimeSubscriptions from '@/features/chat/hooks/useRealtimeSubscriptions';
+import useOnlineStatus from '@/hooks/useOnlineStatus';
 
 export default function HomePage() {
   const { user, loading } = useAuth();
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<'list' | 'chat'>('list');
 
+  useOnlineStatus(user?.id);
   useRealtimeSubscriptions(user?.id ?? '');
 
   if (loading) return <Loader />;

@@ -10,6 +10,7 @@ import useMarkAsRead from '../../hooks/useMarkAsRead';
 import type { Message } from '../../types/chat.types';
 import { useEffect, useState } from 'react';
 import supabase from '@/lib/supabaseClient';
+import useConversations from '../../hooks/useConversations';
 
 type ChatWindowProps = {
   conversationId: string;
@@ -123,6 +124,13 @@ export default function ChatWindow({
     }
   }, [messages, conversationId, currentUserId, markAsRead]);
 
+  //==========
+  const { data: conversations = [] } = useConversations(currentUserId);
+  const currentConversation = conversations.find(
+    (conv) => conv.id === conversationId,
+  );
+  const otherUser = currentConversation?.other_user;
+
   if (isPending) return <Loader />;
   if (isError)
     return <div className="p-4 text-red-500">Error: {error.message}</div>;
@@ -140,6 +148,9 @@ export default function ChatWindow({
         <ChatHeader
           currentUserId={currentUserId}
           conversationId={conversationId}
+          isOnline={otherUser?.is_online}
+          lastSeen={otherUser?.last_seen}
+          otherUser={otherUser}
         />
         <div className="flex-grow overflow-y-auto dark:bg-gray-900 dark:text-white">
           <ChatMessageList messages={messages} />

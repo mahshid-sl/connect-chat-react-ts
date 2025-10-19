@@ -26,9 +26,10 @@ import {
   RiLogoutCircleRLine,
 } from 'react-icons/ri';
 import useProfile, { deleteUserFromAuth } from '../../hooks/useProfile';
-import { signOut } from '@/features/auth/services/auth';
+
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import supabase from '@/lib/supabaseClient';
 
 type ConversationListHeaderProps = {
   currentUserId: string;
@@ -42,12 +43,29 @@ export default function ConversationListHeader({
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    const { error } = await signOut();
-    if (error) {
-      console.error('signout failed', error.message);
-      return;
+    try {
+      await supabase
+        .from('Profiles')
+        .update({
+          is_online: false,
+          last_seen: new Date().toISOString(),
+        })
+        .eq('id', currentUserId);
+
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error('Sign out failed:', error.message);
+        toast.error('Sign out failed');
+        return;
+      }
+
+      toast.success('Signed out successfully');
+      navigate('/');
+    } catch (err) {
+      console.error('Unexpected sign out error:', err);
+      toast.error('Unexpected error occurred');
     }
-    navigate('/');
   };
 
   const handleDeleteAccount = async () => {

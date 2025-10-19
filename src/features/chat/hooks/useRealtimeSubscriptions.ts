@@ -87,16 +87,24 @@ export default function useRealtimeSubscriptions(currentUserId: string) {
       .channel(`profiles-changes-${currentUserId}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'Profiles' },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ['profiles'] });
-          queryClient.invalidateQueries({
-            queryKey: ['conversations', currentUserId],
-          });
+        {
+          event: '*',
+          schema: 'public',
+          table: 'Profiles',
+        },
+        (payload) => {
+          if (
+            payload.eventType === 'UPDATE' &&
+            ('is_online' in payload.new || 'last_seen' in payload.new)
+          ) {
+            queryClient.invalidateQueries({ queryKey: ['profiles'] });
+            queryClient.invalidateQueries({
+              queryKey: ['conversations', currentUserId],
+            });
+          }
         },
       )
       .subscribe();
-
     // ====== Messages ======
     const messageChannel = supabase
       .channel(`messages-changes-${currentUserId}`)
