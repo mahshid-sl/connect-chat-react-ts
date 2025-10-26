@@ -45,6 +45,8 @@ export default function ConversationList({
                 (id: string) => id !== currentUserId,
               );
               console.log('Other user ID:', otherUserId);
+              const otherUser = conv.other_user;
+              const isDeleted = otherUser?.name === 'Deleted Account';
               return (
                 <UserChat
                   key={conv.id}
@@ -54,8 +56,10 @@ export default function ConversationList({
                   time={formatMessageTime(conv.last_message_time)}
                   unreadCount={conv.unread_count || 0}
                   avatarUrl={
-                    conv.other_user?.avatar_url ||
-                    'https://github.com/shadcn.png'
+                    isDeleted
+                      ? 'https://cdn-icons-png.flaticon.com/512/4712/4712104.png'
+                      : conv.other_user?.avatar_url ||
+                        'https://github.com/shadcn.png'
                   }
                   onClick={() => onSelectConversation(conv.id)}
                 />

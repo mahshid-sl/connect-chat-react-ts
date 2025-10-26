@@ -48,13 +48,16 @@ export default function ChatHeader({
   lastSeen,
 }: ChatHeaderProps) {
   const { data: conversations = [] } = useConversations(currentUserId);
-  console.log(`conversations♥️:`, conversations[1]);
 
   const currentConversation = conversations.find(
     (conv) => conv.id === conversationId,
   );
-
   const otherUser = currentConversation?.other_user;
+
+  const isDeleted = otherUser?.name === 'Deleted Account';
+
+  const deletedAvatar =
+    'https://cdn-icons-png.flaticon.com/512/4712/4712104.png';
 
   //TODO------set wallpaper
 
@@ -62,12 +65,18 @@ export default function ChatHeader({
     <header className="flex shrink-0 items-center justify-between border-b border-gray-50 bg-white p-4 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
       <div className="flex items-center gap-4">
         {/* user avatar */}
-        <Avatar>
+        <Avatar className={isDeleted ? 'opacity-60 grayscale' : ''}>
           <AvatarImage
-            src={otherUser?.avatar_url || 'https://github.com/shadcn.png'}
+            src={
+              isDeleted
+                ? deletedAvatar
+                : otherUser?.avatar_url || 'https://github.com/shadcn.png'
+            }
             alt="User"
           />
-          <AvatarFallback>{otherUser?.name.slice(0, 2) || '??'}</AvatarFallback>
+          <AvatarFallback>
+            {isDeleted ? '??' : otherUser?.name.slice(0, 2) || '??'}
+          </AvatarFallback>
         </Avatar>
         {/* user status and name */}
         <div className="dark:text-white">
