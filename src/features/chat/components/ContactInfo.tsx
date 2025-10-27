@@ -7,15 +7,18 @@ import {
   RiVolumeMuteLine,
   RiForbid2Line,
 } from 'react-icons/ri';
-import { AtSign, Image, FileText } from 'lucide-react';
+import { AtSign } from 'lucide-react';
 
-const ContactInfo = () => {
+type ContactInfoProps = {
+  otherUser?: {
+    name?: string;
+    username?: string;
+    phone_number?: string;
+    bio?: string;
+  } | null;
+};
 
-const 
-
-
-
-
+const ContactInfo = ({ otherUser }: ContactInfoProps) => {
   return (
     <div className="min-h-screen w-full bg-gray-50 p-4 dark:bg-gray-900 dark:text-white">
       <div className="mx-auto w-full max-w-sm dark:border-gray-700">
@@ -27,7 +30,7 @@ const
                 <RiInformationLine size={18} /> Bio
               </Label>
               <p className="text-sm text-gray-600">
-                This is a short bio about the user.
+                {otherUser?.bio || 'No bio available'}
               </p>
             </div>
 
@@ -36,7 +39,9 @@ const
               <Label className="flex items-center gap-2 text-sm font-semibold">
                 <AtSign size={18} /> Username
               </Label>
-              <p className="text-sm text-gray-600">@username</p>
+              <p className="text-sm text-gray-600">
+                {otherUser?.username || 'No username available'}
+              </p>
             </div>
 
             {/* Phone */}
@@ -44,11 +49,13 @@ const
               <Label className="flex items-center gap-2 text-sm font-semibold">
                 <RiPhoneFill size={18} /> Phone number
               </Label>
-              <p className="text-sm text-gray-600">+123456789</p>
+              <p className="text-sm text-gray-600">
+                {otherUser?.phone_number || 'No phone number available'}
+              </p>
             </div>
 
             {/* Shared Media */}
-            <div className="grid gap-3">
+            {/* <div className="grid gap-3">
               <Label className="flex items-center gap-2 text-sm font-semibold">
                 <Image size={18} /> Shared Media
               </Label>
@@ -69,10 +76,10 @@ const
                   className="h-16 w-16 rounded-md object-cover"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Files */}
-            <div className="grid gap-3">
+            {/* <div className="grid gap-3">
               <Label className="flex items-center gap-2 text-sm font-semibold">
                 <FileText size={18} /> Files
               </Label>
@@ -80,25 +87,25 @@ const
                 <li>resume.pdf</li>
                 <li>invoice.docx</li>
               </ul>
-            </div>
+            </div> */}
 
             {/* Actions */}
-            <div className="grid gap-2 pt-2">
+            <div className="grid gap-2 pt-10">
               <Button
                 variant="outline"
-                className="flex w-full items-center gap-2"
+                className="flex w-full cursor-pointer items-center gap-2"
               >
                 <RiVolumeMuteLine size={18} /> Mute Notifications
               </Button>
               <Button
                 variant="outline"
-                className="flex w-full items-center gap-2"
+                className="flex w-full cursor-pointer items-center gap-2"
               >
                 <RiForbid2Line size={18} /> Block user
               </Button>
               <Button
                 variant="destructive"
-                className="flex w-full items-center gap-2"
+                className="flex w-full cursor-pointer items-center gap-2"
               >
                 <RiUserFollowLine size={18} /> Delete user
               </Button>

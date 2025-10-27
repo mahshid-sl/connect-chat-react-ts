@@ -30,7 +30,7 @@ import ContactInfo from '../ContactInfo';
 import useConversations from '../../hooks/useConversations';
 import { formatLastSeen } from '@/utils/formatLastSeen';
 
-type ChatHeaderProps = {
+export type ChatHeaderProps = {
   currentUserId: string;
   conversationId: string;
   isOnline?: boolean;
@@ -38,6 +38,9 @@ type ChatHeaderProps = {
   otherUser?: {
     name?: string;
     avatar_url?: string;
+    bio?: string;
+    username?: string;
+    phone?: string;
   };
 };
 
@@ -53,6 +56,7 @@ export default function ChatHeader({
     (conv) => conv.id === conversationId,
   );
   const otherUser = currentConversation?.other_user;
+  console.log('🔍 otherUser in ChatHeader:', otherUser);
 
   const isDeleted = otherUser?.name === 'Deleted Account';
 
@@ -141,7 +145,13 @@ export default function ChatHeader({
                 </div>
               </div>
             </SheetHeader>
-            <ContactInfo />
+            {otherUser ? (
+              <ContactInfo otherUser={otherUser} />
+            ) : (
+              <div className="p-6 text-center text-gray-500 dark:text-gray-400">
+                Loading user info...
+              </div>
+            )}
           </SheetContent>
         </Sheet>
 
