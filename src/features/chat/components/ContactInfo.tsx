@@ -10,6 +10,12 @@ import {
 import { AtSign, Image, FileText } from 'lucide-react';
 
 const ContactInfo = () => {
+
+const 
+
+
+
+
   return (
     <div className="min-h-screen w-full bg-gray-50 p-4 dark:bg-gray-900 dark:text-white">
       <div className="mx-auto w-full max-w-sm dark:border-gray-700">

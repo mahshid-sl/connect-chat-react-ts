@@ -112,16 +112,32 @@ export default function ChatHeader({
           </SheetTrigger>
           <SheetContent side="right">
             <SheetHeader className="border-b border-gray-300 dark:border-gray-700">
-              <div className="flex items-center gap-2">
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
+              <div className="flex items-center gap-3">
+                <Avatar className={isDeleted ? 'opacity-60 grayscale' : ''}>
+                  <AvatarImage
+                    src={
+                      isDeleted
+                        ? deletedAvatar
+                        : otherUser?.avatar_url ||
+                          'https://github.com/shadcn.png'
+                    }
+                    alt="User"
+                  />
+                  <AvatarFallback>
+                    {isDeleted ? '??' : otherUser?.name.slice(0, 2) || '??'}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col gap-1.5">
-                  <span> user name</span>
-                  <span className="text-xs text-gray-500">
-                    last seen 2 minutes ago
-                  </span>
+                  <span> {otherUser?.name || 'Unknown User'}</span>
+                  <p
+                    className={`text-sm ${
+                      isOnline
+                        ? 'text-green-500'
+                        : 'text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
+                    {formatLastSeen(lastSeen, isOnline, otherUser?.name)}
+                  </p>
                 </div>
               </div>
             </SheetHeader>
