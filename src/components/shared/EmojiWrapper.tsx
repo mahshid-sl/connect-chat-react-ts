@@ -4,11 +4,18 @@ type EmojiWrapperProps = {
   text: string;
 };
 
-const EmojiWrapper = ({ text }: EmojiWrapperProps) => {
+const EmojiWrapper = ({
+  text,
+  dir,
+  className,
+}: EmojiWrapperProps & { dir: 'ltr' | 'rtl'; className?: string }) => {
   const parts = text.split(/(\s+)/);
 
   return (
-    <span className="bg inline-flex flex-wrap items-center gap-1">
+    <span
+      className={`bg inline-flex flex-wrap items-center gap-1 ${className}`}
+      dir={dir}
+    >
       {parts.map((part, index) => {
         const cat = catEmojis.find((e) =>
           e.names.some((name) => name.toLowerCase() === part.toLowerCase()),

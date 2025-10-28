@@ -153,7 +153,11 @@ export default function ChatWindow({
           otherUser={otherUser}
         />
         <div className="flex-grow overflow-y-auto dark:bg-gray-900 dark:text-white">
-          <ChatMessageList messages={messages} />
+          <ChatMessageList
+            messages={messages}
+            otherUser={otherUser}
+            currentUserId={currentUserId}
+          />
         </div>
         <ChatInput
           onSend={(message) =>
